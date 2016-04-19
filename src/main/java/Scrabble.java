@@ -4,32 +4,26 @@ import java.util.HashMap;
 public class Scrabble {
   public static void main(String[] args) {}
 
+  HashMap<String, Integer> values = new HashMap<String, Integer>();
+
   public Object getScore(String words){
-    HashMap<String[], Integer> scrabbleValues = new HashMap<String[], Integer>();
-    String[] valuesOne = {"a","e","i","o","u","l","n","r","s","t"};
-    String[] valuesTwo = {"d","g"};
-    Object[] totalArray = {valuesOne, valuesTwo};
+    values.put("aeiounrst", 1);
+    values.put("dg", 2);
+    values.put("bcmp", 3);
+    values.put("fhvwy", 4);
+    values.put("k", 5);
+    values.put("jx", 8);
+    values.put("qz", 10);
+    char[] wordtoChar = words.toCharArray();
     Integer total = 0;
 
-    for (Integer index = 0; index < 2; index++){
-        for(Integer index2 = 0; index2 < 5; index2++){
-          if (totalArray[index][index2] == words){
-            total = total + 1;
+    for (Integer index = 0; index < wordtoChar.length; index++){
+      for (String key : values.keySet()){
+        if(key.indexOf(String.valueOf(wordtoChar[index])) >= 0){
+          total += values.get(key);
         }
       }
     }
     return total;
-    // valuesOne.add("a");
-    // valuesOne.add("e");
-    // valuesOne.add("c");
-    // scrabbleValues.put(valuesOne, 1);
-    // for( Object key : scrabbleValues.keySet()) {
-    //   for(Object keyArrayValue : key){
-    //     if(keyArrayValue == words){
-    //       Object value = scrabbleValues.get(key);
-    //       return value;
-    //     }
-    //   }
-    // }
   }
 }
